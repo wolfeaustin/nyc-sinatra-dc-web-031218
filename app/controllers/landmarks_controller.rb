@@ -18,8 +18,13 @@ class LandmarksController < ApplicationController
 
 
   post '/landmarks' do
-    puts params 
-    # @landmark = Landmark.create(name: params[:name], year_completed: params[:year_completed])
+    puts params
+    if params[:figure_id] == "look_to_userinput"
+      new_figure = Figure.create(name: params[:new_figure])
+      @landmark = Landmark.create(name: params[:name], year_completed: params[:year_completed].to_i, figure_id: new_figure.id)
+    else
+      @landmark = Landmark.create(name: params[:name], year_completed: params[:year_completed], figure_id: params[:figure_id].to_i)
+    end
     redirect to '/landmarks'
   end
 
@@ -27,6 +32,21 @@ class LandmarksController < ApplicationController
     @landmark = Landmark.find(params[:id])
     @figures = Figure.all
     erb '/landmarks/edit'.to_sym
+  end
+
+  patch "/landmarks/:id" do
+    puts params
+    landmark = Landmark.find(params[:id])
+    if params[:figure_id] == "look_to_userinput"
+      new_figure = Figure.create(name: params[:new_figure])
+      landmark.update(name: params[:name], year_completed: params[:year_completed].to_i, figure_id: new_figure.id)
+    elsif params[:figure_id] == "none"
+      landmark.update(name: params[:name], year_completed: params[:year_completed].to_i, figure_id: nil)
+    else
+      landmark.update(name: params[:name], year_completed: params[:year_completed], figure_id: params[:figure_id].to_i)
+    end
+
+    redirect to "/landmarks/#{params[:id]}"
   end
 
 

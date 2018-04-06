@@ -2,11 +2,18 @@
   <tr>
     <th>Name</th>
     <th>Year Completed</th>
+    <th>Figure</th>
   </tr>
   <tr>
     <td><%= @landmark.name %></td>
     <td><%= @landmark.year_completed %></td>
+    <% if @landmark.figure %>
+      <td><%= @landmark.figure.name %></td>
+    <% else %>
+      <td>No Figure</td>
+    <% end %>
   </tr>
 <table>
 
 <p> <a href= "/landmarks/<%="#{@landmark.id}"%>/edit"> edit this landmark </a> </p>
+<p> <a href= "/landmarks"> all landmarks </a> </p>

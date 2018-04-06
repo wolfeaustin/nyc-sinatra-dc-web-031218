@@ -3,10 +3,14 @@
   <p>Year Completed: <input type="text" name="year_completed" value= '<%= "#{@landmark.year_completed}"  %>' ></p>
 
   <% @figures.each do |figure| %>
-  <p><input type="radio" name= "figure_id" value= '<%="#{figure.id}" %>'>  <%="#{figure.name}" %></p>
+    <% if @landmark.figure == figure %>
+        <p><input type="radio" name= "figure_id" value= '<%="#{figure.id}" %>' checked>  <%="#{figure.name}" %></p>
+    <% else %>
+        <p><input type="radio" name= "figure_id" value= '<%="#{figure.id}" %>'>  <%="#{figure.name}" %></p>
+    <% end %>
   <% end %>
   <p> <input type="radio" name="figure_id" value= "look_to_userinput"> Other:  <input type="text" name="new_figure"> </p>
-
+  <p><input type="radio" name= "figure_id" value="none">  None</p>
 
   <input type="submit" value="update">
   <input id="hidden" type="hidden" name="_method" value="patch">
