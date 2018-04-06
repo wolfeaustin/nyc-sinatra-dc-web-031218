@@ -1,0 +1,14 @@
+<form method="post" action="/landmarks/<%="#{@landmark.id}"%>">
+  <p>Name: <input type="text" name="name" value= '<%= "#{@landmark.name}"  %>'></p>
+  <p>Year Completed: <input type="text" name="year_completed" value= '<%= "#{@landmark.year_completed}"  %>' ></p>
+
+  <% @figures.each do |figure| %>
+  <p><input type="radio" name= "figure_id" value= '<%="#{figure.id}" %>'>  <%="#{figure.name}" %></p>
+  <% end %>
+  <p> <input type="radio" name="figure_id" value= "look_to_userinput"> Other:  <input type="text" name="new_figure"> </p>
+
+
+  <input type="submit" value="update">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+
+</form>

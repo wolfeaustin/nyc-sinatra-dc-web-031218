@@ -1,5 +1,10 @@
 <form method="POST" action="/landmarks">
   <p>Landmark Name: <input type="text" name="name"/></p>
   <p>Landmark Year Completed: <input type="text" name="year_completed"/></p>
+
+  <% @figures.each do |figure| %>
+  <p><input type="radio" name= "figure_id" value= '<%="#{figure.id}" %>'>  <%="#{figure.name}" %></p>
+  <% end %>
+  <p> <input type="radio" name="figure_id" value= "look_to_userinput"> Other:  <input type="text" name="new_figure"> </p>
   <input type="submit" value="Create Landmark"/>
 </form>
